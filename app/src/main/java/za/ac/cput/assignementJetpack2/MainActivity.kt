@@ -1,5 +1,6 @@
 package za.ac.cput.assignementJetpack2
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,6 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -24,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import za.ac.cput.assignementJetpack2.ui.theme.AssignementJetpack2Theme
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +37,6 @@ class MainActivity : ComponentActivity() {
                 var show: MutableState<Boolean> = remember { mutableStateOf(false) }
                 ShowDialog(visible = show)
 
-
                 var m =TextView("Welcome to My Jetpack Compose Journey" )
                 main(m)
                 Column(
@@ -43,15 +45,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Image(painter = painterResource(id = R.drawable.fr), contentDescription = null,
-                        modifier = Modifier.width(600.dp).height(520.dp))
+                        modifier = Modifier.width(500.dp).height(480.dp))
                     val context= LocalContext.current
                     Button(onClick = {
                         show.value=true},
                         border= BorderStroke(10.dp, Color.LightGray),
                         contentPadding = PaddingValues(16.dp),
-                        modifier = Modifier.size(width = 350.dp,height = 70.dp).background(Color.White),
-
-
+                        modifier = Modifier.size(width = 330.dp,height = 80.dp).background(Color.White),
 
                     ) {
 
@@ -59,15 +59,35 @@ class MainActivity : ComponentActivity() {
 
                             imageVector = Icons.Filled.Info,
                             contentDescription = "Info description",
-                            Modifier.padding(end = 20.dp)
+                            Modifier.padding(end = 5.dp)
                         )
                         Text(text = "Info",
                             style= MaterialTheme.typography.body1,
-                            modifier= Modifier.padding(5.dp))
+                            modifier= Modifier.padding(2.dp))
                     }
 
-                }
+                    Box()
 
+                    {
+                        Button(onClick = {
+                            val navigate= Intent(this@MainActivity, Practical02::class.java)
+                            startActivity(navigate)
+                        },
+
+                            border= BorderStroke(10.dp, color = Color.LightGray),
+                            contentPadding = PaddingValues(16.dp),
+                            modifier = Modifier.size(width = 350.dp,height = 70.dp).background(Color.White),
+
+                            ) {
+
+                            Icon(
+                                imageVector = Icons.Filled.Person,
+                                contentDescription = "Info person",
+                                Modifier.padding(end = 5.dp))
+
+                            Text(text = "Start Journey \n", fontSize = 22.sp)
+                        }
+                    }
             }
         }
     }
@@ -87,9 +107,6 @@ fun main(text: TextView)
                 .fillMaxSize()
                 .padding(10.dp), textAlign = TextAlign.Center)}
 }
-
-
-
 
 @Composable
 fun ShowDialog(visible: MutableState<Boolean>)
@@ -114,5 +131,4 @@ fun ShowDialog(visible: MutableState<Boolean>)
             }
         )
 
-
-    }}
+    }}}
